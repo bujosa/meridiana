@@ -25,7 +25,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
           label: 'Account',
         ),
       ],
-      currentIndex: index ?? 0,
+      currentIndex: index,
       selectedItemColor: Colors.amber,
       unselectedItemColor: Colors.white,
       onTap: (int actualIndex) {
