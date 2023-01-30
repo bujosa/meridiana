@@ -41,6 +41,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.0"
+  cool_dropdown:
+    dependency: "direct main"
+    description:
+      name: cool_dropdown
+      sha256: "6b1bbadd8605f957b8199e5ece8f51435b371d43978558e5332f29399b4f287a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.2"
   cupertino_icons:
     dependency: "direct main"
     description:
