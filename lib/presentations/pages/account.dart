@@ -66,7 +66,7 @@ class _AccountPageState extends State<AccountPage> {
                 child: Text('Name',
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 24,
                     )),
               ),
@@ -98,7 +98,7 @@ class _AccountPageState extends State<AccountPage> {
                 child: Text('Currency',
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 24,
                     )),
               ),
@@ -144,7 +144,7 @@ class _AccountPageState extends State<AccountPage> {
           },
           child: Icon(
             Icons.edit_document,
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.primary,
             size: 50,
           ),
         ),
