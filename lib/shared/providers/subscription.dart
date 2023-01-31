@@ -37,15 +37,12 @@ class SubscriptionProvider with ChangeNotifier {
   }
 
   Future<void> _saveSubscriptions() async {
-    // Convert the list of subscriptions to a list of strings
     String subscriptionString = Subscription.encode(subscriptions);
     await prefs.setString('subscriptions_key', subscriptionString);
     notifyListeners();
   }
 
   Future<void> setName(String name) async {
-    print('setName: $name');
-
     this.name = name;
     await prefs.setString('name_key', name);
 
@@ -53,8 +50,6 @@ class SubscriptionProvider with ChangeNotifier {
   }
 
   Future<void> setCurrency(int currency) async {
-    print('El error donde pasa');
-    print('setCurrency: $currency');
     this.currency = currency;
     await prefs.setInt('currency_key', currency);
     notifyListeners();

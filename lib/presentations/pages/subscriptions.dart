@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:meridiana/presentations/models/subscription.dart';
+import 'package:meridiana/shared/models/subscription.dart';
+import 'package:meridiana/shared/providers/subscription.dart';
+import 'package:provider/provider.dart';
 import '../widgets/bottom_navigation_bar.dart';
 
 class SubscriptionsPage extends StatefulWidget {
@@ -11,29 +13,10 @@ class SubscriptionsPage extends StatefulWidget {
 }
 
 class _SubscriptionsPageState extends State<SubscriptionsPage> {
-  List<Subscription> subscriptions = [
-    Subscription(
-        name: 'Spotify',
-        price: 5.99,
-        category: 1,
-        image:
-            'https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-marilyn-scott-0.png'),
-    Subscription(
-        name: 'Netflix',
-        price: 9.99,
-        category: 1,
-        image:
-            'https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png'),
-    Subscription(
-        name: 'Disney+',
-        price: 7.99,
-        category: 1,
-        image:
-            'https://seeklogo.com/images/D/disney-logo-575AED0F1D-seeklogo.com.png'),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final subscriptionProvider = Provider.of<SubscriptionProvider>(context);
+
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
@@ -63,9 +46,9 @@ class _SubscriptionsPageState extends State<SubscriptionsPage> {
         body: Padding(
           padding: const EdgeInsets.only(top: 10),
           child: ListView.builder(
-            itemCount: subscriptions.length,
+            itemCount: subscriptionProvider.subscriptions.length,
             itemBuilder: (context, index) {
-              final subscription = subscriptions[index];
+              final subscription = subscriptionProvider.subscriptions[index];
               return Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
@@ -120,7 +103,8 @@ class _SubscriptionsPageState extends State<SubscriptionsPage> {
                                   TextButton(
                                     onPressed: () => {
                                       setState(() {
-                                        subscriptions.removeAt(index);
+                                        subscriptionProvider
+                                            .removeSubscription(subscription);
                                       }),
                                       Navigator.pop(context)
                                     },

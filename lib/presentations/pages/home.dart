@@ -1,5 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:meridiana/shared/providers/subscription.dart';
+import 'package:meridiana/shared/utils/category_map.dart';
+import 'package:provider/provider.dart';
 import '../widgets/bottom_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -50,6 +53,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final subscriptionProvider = Provider.of<SubscriptionProvider>(context);
+
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Column(
@@ -67,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'John',
+                      text: subscriptionProvider.name,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary,
                         fontSize: 40,
@@ -83,15 +88,16 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.euro,
-                    color: Colors.white,
-                    size: 40,
-                  ),
+                children: [
+                  currencyToIconHomePage[subscriptionProvider.currency] ??
+                      const Icon(
+                        Icons.attach_money,
+                        color: Colors.white,
+                        size: 40,
+                      ),
                   Text(
-                    '1000',
-                    style: TextStyle(
+                    subscriptionProvider.total.toStringAsFixed(2),
+                    style: const TextStyle(
                         color: Colors.white,
                         shadows: [
                           Shadow(
