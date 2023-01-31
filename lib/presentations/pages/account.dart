@@ -1,5 +1,8 @@
 import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:meridiana/shared/providers/subscription.dart';
+import 'package:meridiana/shared/utils/constants.dart';
+import 'package:provider/provider.dart';
 import '../widgets/bottom_navigation_bar.dart';
 
 class AccountPage extends StatefulWidget {
@@ -10,37 +13,14 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  TextEditingController lastNameEditingController = TextEditingController();
-
-  List dropdownItemList = [
-    {
-      'label': 'Dollar',
-      'value': 'dolar',
-      'icon': const Icon(
-        Icons.attach_money,
-        color: Colors.amber,
-      )
-    },
-    {
-      'label': 'Euro',
-      'value': 'euro',
-      'icon': const Icon(
-        Icons.euro,
-        color: Colors.amber,
-      )
-    },
-    {
-      'label': 'Peso Dominicano',
-      'value': 'peso dominicano',
-      'icon': const Icon(
-        Icons.attach_money_outlined,
-        color: Colors.amber,
-      )
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final subcriptionProvider = Provider.of<SubscriptionProvider>(context);
+    int? actualCurrency;
+
+    TextEditingController nameEditingController =
+        TextEditingController(text: subcriptionProvider.name);
+
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Padding(
@@ -84,12 +64,14 @@ class _AccountPageState extends State<AccountPage> {
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.person),
                       prefixIconColor: Colors.white,
-                      hintText: 'LastName',
+                      hintText: 'Enter your name',
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),
                     ),
-                    controller: lastNameEditingController,
+                    onSubmitted: (value) =>
+                        {subcriptionProvider.setName(value)},
+                    controller: nameEditingController,
                   ),
                 ),
               ),
@@ -122,16 +104,22 @@ class _AccountPageState extends State<AccountPage> {
                 resultWidth: MediaQuery.of(context).size.width * 0.85,
                 dropdownHeight: 200,
                 dropdownWidth: MediaQuery.of(context).size.width * 0.75,
-                dropdownList: dropdownItemList,
-                onChange: (value) {},
-                defaultValue: dropdownItemList[1],
+                dropdownList: dropdownCurrencyList,
+                onChange: (value) {
+                  actualCurrency = value['value'];
+                },
+                defaultValue: actualCurrency == null
+                    ? dropdownCurrencyList[subcriptionProvider.currency]
+                    : dropdownCurrencyList[actualCurrency],
               )
             ],
           ),
         ),
         floatingActionButton: GestureDetector(
           onTap: () {
-            lastNameEditingController.text = 'Changed';
+            subcriptionProvider
+                .setCurrency(actualCurrency ?? subcriptionProvider.currency);
+
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 duration: Duration(milliseconds: 1300),
