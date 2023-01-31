@@ -129,12 +129,24 @@ class _AccountPageState extends State<AccountPage> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
+        floatingActionButton: GestureDetector(
+          onTap: () {
             lastNameEditingController.text = 'Changed';
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                duration: Duration(milliseconds: 1300),
+                content: Text(
+                  'Information updated!',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            );
           },
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          child: const Icon(Icons.edit_document, color: Colors.black),
+          child: Icon(
+            Icons.edit_document,
+            color: Theme.of(context).colorScheme.secondary,
+            size: 50,
+          ),
         ),
         bottomNavigationBar: const BottomNavigationBarWidget(index: 2));
   }
