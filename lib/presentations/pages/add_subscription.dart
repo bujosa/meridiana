@@ -1,6 +1,7 @@
 import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../models/subscription.dart';
 import '../widgets/bottom_navigation_bar.dart';
 
 class AddSubscriptionPage extends StatefulWidget {
@@ -39,18 +40,6 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        resizeToAvoidBottomInset: true,
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          elevation: 0,
-          title: Text(
-            'New Subscription',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 30,
-            ),
-          ),
-        ),
         body: Dismissible(
           key: const Key('add_subscription'),
           direction: DismissDirection.startToEnd,
@@ -58,21 +47,30 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
             Navigator.pop(context);
           },
           child: Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 20.0),
             child: SingleChildScrollView(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0, top: 40),
-                  child: Text('Name of the subscription',
+                const Padding(
+                  padding: EdgeInsets.only(top: 80.0, bottom: 20.0),
+                  child: Center(
+                    child: Text(
+                      'Add Subscription',
                       style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 24,
-                      )),
+                        color: Colors.white,
+                        fontSize: 40,
+                      ),
+                    ),
+                  ),
                 ),
+                Text('Subscription name',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 24,
+                    )),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
                   child: Container(
@@ -85,7 +83,7 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                       decoration: const InputDecoration(
                         floatingLabelStyle: TextStyle(color: Colors.white),
                         border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.add_link),
+                        prefixIcon: Icon(Icons.store),
                         prefixIconColor: Colors.white,
                         hintText: 'Example: Netflix',
                         hintStyle: TextStyle(
@@ -96,15 +94,12 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Text('Logo image link',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 24,
-                      )),
-                ),
+                Text('Logo link',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 24,
+                    )),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
                   child: Container(
@@ -119,7 +114,7 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.add_link),
                         prefixIconColor: Colors.white,
-                        hintText: 'Add logo image link',
+                        hintText: 'https://example.com/logo.png',
                         hintStyle: TextStyle(
                           color: Colors.white,
                         ),
@@ -128,15 +123,12 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Text('Amount',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 24,
-                      )),
-                ),
+                Text('Amount',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 24,
+                    )),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
                   child: Container(
@@ -147,7 +139,7 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                     child: TextField(
                       style: const TextStyle(color: Colors.white),
                       keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
+                      inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                       ],
                       decoration: const InputDecoration(
@@ -164,37 +156,82 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Text('Category ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 24,
-                        )),
-                    CoolDropdown(
-                      resultTS: const TextStyle(
-                        fontSize: 20,
+                Text('Category ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 24,
+                    )),
+                CoolDropdown(
+                  resultTS: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                  resultBD: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
                         color: Colors.white,
+                        spreadRadius: 1,
                       ),
-                      resultBD: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.white,
-                            spreadRadius: 1,
-                            blurRadius: 2,
-                          ),
-                        ],
+                    ],
+                  ),
+                  resultWidth: MediaQuery.of(context).size.width * 0.85,
+                  resultHeight: MediaQuery.of(context).size.height * 0.070,
+                  dropdownHeight: 200,
+                  dropdownWidth: MediaQuery.of(context).size.width * 0.4,
+                  dropdownList: dropdownItemList,
+                  onChange: (value) {},
+                  defaultValue: dropdownItemList[1],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.background,
+                        foregroundColor: Theme.of(context).colorScheme.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                       ),
-                      resultWidth: MediaQuery.of(context).size.width * 0.4,
-                      resultHeight: MediaQuery.of(context).size.height * 0.070,
-                      dropdownHeight: 200,
-                      dropdownWidth: MediaQuery.of(context).size.width * 0.4,
-                      dropdownList: dropdownItemList,
-                      onChange: (value) {},
-                      defaultValue: dropdownItemList[1],
+                      child:
+                          const Text('Cancel', style: TextStyle(fontSize: 20)),
+                    ),
+                    const SizedBox(width: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (nameSubscriptionEditingController.text.isNotEmpty &&
+                            imageSubscriptionEditingController
+                                .text.isNotEmpty &&
+                            priceSubscriptionEditingController
+                                .text.isNotEmpty) {
+                          final subscription = Subscription(
+                            name: nameSubscriptionEditingController.text,
+                            image: imageSubscriptionEditingController.text,
+                            price: double.parse(
+                                priceSubscriptionEditingController.text),
+                            category: dropdownItemList[1],
+                          );
+
+                          Navigator.pop(context);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.background,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text('Save', style: TextStyle(fontSize: 20)),
                     ),
                   ],
                 )
