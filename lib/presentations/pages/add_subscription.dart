@@ -1,7 +1,10 @@
 import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../models/subscription.dart';
+import 'package:meridiana/shared/providers/subscription.dart';
+import 'package:provider/provider.dart';
+import '../../shared/models/subscription.dart';
+import '../../shared/utils/constants.dart';
 import '../widgets/bottom_navigation_bar.dart';
 
 class AddSubscriptionPage extends StatefulWidget {
@@ -25,23 +28,10 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
 
   int category = 0;
 
-  List dropdownItemList = [
-    {
-      'label': 'Streaming',
-      'value': 1,
-    },
-    {
-      'label': 'Lighting',
-      'value': 2,
-    },
-    {
-      'label': 'Gaming',
-      'value': 3,
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final suscriptioProvider = Provider.of<SubscriptionProvider>(context);
+
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Dismissible(
@@ -186,13 +176,13 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                   resultHeight: MediaQuery.of(context).size.height * 0.070,
                   dropdownHeight: 200,
                   dropdownWidth: MediaQuery.of(context).size.width * 0.4,
-                  dropdownList: dropdownItemList,
+                  dropdownList: dropdownCategoryList,
                   onChange: (value) {
                     setState(() {
                       category = value;
                     });
                   },
-                  defaultValue: dropdownItemList[category],
+                  defaultValue: dropdownCategoryList[category],
                 ),
                 const SizedBox(height: 20),
                 Row(
@@ -244,6 +234,8 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                                 priceSubscriptionEditingController.text),
                             category: category,
                           );
+
+                          suscriptioProvider.addSubscription(subscription);
 
                           Navigator.pop(context);
                         } else {
