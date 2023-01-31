@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
               errorColor: Colors.red,
               backgroundColor: const Color.fromARGB(255, 37, 36, 36))),
       color: Colors.grey,
-      home: const SubscriptionsPage(),
+      home: const HomePage(),
       navigatorKey: GlobalKey<NavigatorState>(),
       routes: <String, WidgetBuilder>{
         '/home': (BuildContext context) => const HomePage(),
