@@ -21,6 +21,10 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
   TextEditingController imageSubscriptionEditingController =
       TextEditingController();
 
+  FocusNode urlSubscriptionFocusNode = FocusNode();
+
+  int category = 0;
+
   List dropdownItemList = [
     {
       'label': 'Streaming',
@@ -109,6 +113,7 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                     ),
                     child: TextField(
                       style: const TextStyle(color: Colors.white),
+                      focusNode: urlSubscriptionFocusNode,
                       decoration: const InputDecoration(
                         floatingLabelStyle: TextStyle(color: Colors.white),
                         border: OutlineInputBorder(),
@@ -182,8 +187,12 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                   dropdownHeight: 200,
                   dropdownWidth: MediaQuery.of(context).size.width * 0.4,
                   dropdownList: dropdownItemList,
-                  onChange: (value) {},
-                  defaultValue: dropdownItemList[1],
+                  onChange: (value) {
+                    setState(() {
+                      category = value;
+                    });
+                  },
+                  defaultValue: dropdownItemList[category],
                 ),
                 const SizedBox(height: 20),
                 Row(
@@ -212,15 +221,41 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                                 .text.isNotEmpty &&
                             priceSubscriptionEditingController
                                 .text.isNotEmpty) {
+                          if (!imageSubscriptionEditingController.text
+                              .contains('https://')) {
+                            FocusScope.of(context)
+                                .requestFocus(urlSubscriptionFocusNode);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                duration: Duration(milliseconds: 1000),
+                                backgroundColor: Colors.blueAccent,
+                                content: Text('Please enter a valid image link',
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.white)),
+                              ),
+                            );
+                            return;
+                          }
+
                           final subscription = Subscription(
                             name: nameSubscriptionEditingController.text,
                             image: imageSubscriptionEditingController.text,
                             price: double.parse(
                                 priceSubscriptionEditingController.text),
-                            category: dropdownItemList[1],
+                            category: category,
                           );
 
                           Navigator.pop(context);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              duration: Duration(milliseconds: 1000),
+                              backgroundColor: Colors.blueAccent,
+                              content: Text('Please fill all fields',
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white)),
+                            ),
+                          );
                         }
                       },
                       style: ElevatedButton.styleFrom(
