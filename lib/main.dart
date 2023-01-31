@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meridiana/presentations/pages/account.dart';
+import 'package:meridiana/presentations/pages/add_subscription.dart';
 import 'package:meridiana/presentations/pages/home.dart';
 import 'package:meridiana/presentations/pages/subscriptions.dart';
 
@@ -13,18 +14,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Meridiana',
       theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch(
+              cardColor: const Color.fromARGB(255, 37, 36, 36),
+              brightness: Brightness.dark,
               primarySwatch: Colors.amber,
+              errorColor: Colors.red,
               backgroundColor: const Color.fromARGB(255, 37, 36, 36))),
       color: Colors.grey,
-      home: const HomePage(),
+      home: const SubscriptionsPage(),
       navigatorKey: GlobalKey<NavigatorState>(),
       routes: <String, WidgetBuilder>{
         '/home': (BuildContext context) => const HomePage(),
         '/subscriptions': (BuildContext context) => const SubscriptionsPage(),
         '/account': (BuildContext context) => const AccountPage(),
+        '/add_subscription': (BuildContext context) =>
+            const AddSubscriptionPage(),
       },
     );
   }
