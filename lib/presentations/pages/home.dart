@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:meridiana/presentations/widgets/home/trending_subscription_tile.dart';
 import 'package:meridiana/shared/providers/subscription.dart';

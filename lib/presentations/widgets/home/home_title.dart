@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meridiana/shared/models/subscription.dart';
 import 'package:meridiana/shared/providers/subscription.dart';
 import 'package:provider/provider.dart';
 

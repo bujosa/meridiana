@@ -1,6 +1,7 @@
 import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:meridiana/presentations/widgets/add_subscription/add_subscription_title.dart';
 import 'package:meridiana/shared/providers/subscription.dart';
 import 'package:provider/provider.dart';
 import '../../shared/models/subscription.dart';
@@ -47,18 +48,7 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.only(top: 80.0, bottom: 20.0),
-                  child: Center(
-                    child: Text(
-                      'Add Subscription',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                      ),
-                    ),
-                  ),
-                ),
+                const AddSubscriptionTitle(),
                 Text('Subscription name',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
