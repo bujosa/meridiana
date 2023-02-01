@@ -66,4 +66,17 @@ class SubscriptionProvider with ChangeNotifier {
           previousValue + element.price);
 
   int get totalSubscriptions => subscriptions.length;
+
+  List<Subscription> get top3Subscriptions {
+    List<Subscription> sortedSubscriptions = subscriptions
+        .where((element) => element.price > 0)
+        .toList()
+      ..sort((a, b) => b.price.compareTo(a.price));
+
+    if (sortedSubscriptions.length < 3) {
+      return sortedSubscriptions;
+    }
+
+    return sortedSubscriptions.sublist(0, 3);
+  }
 }
