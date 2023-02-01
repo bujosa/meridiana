@@ -179,7 +179,7 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                   dropdownList: dropdownCategoryList,
                   onChange: (value) {
                     setState(() {
-                      category = value;
+                      category = value['value'];
                     });
                   },
                   defaultValue: dropdownCategoryList[category],
