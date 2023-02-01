@@ -16,8 +16,8 @@ class Subscription {
   factory Subscription.fromJson(Map<String, dynamic> json) {
     return Subscription(
       name: json['name'],
-      price: json['price'],
-      category: json['category'],
+      price: json['price'] as double,
+      category: json['category'] as int,
       image: json['image'],
     );
   }
@@ -26,7 +26,7 @@ class Subscription {
     return {
       'name': name,
       'price': price.toString(),
-      'category': category,
+      'category': category.toString(),
       'image': image,
     };
   }
