@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meridiana/shared/providers/subscription.dart';
 import 'package:meridiana/shared/utils/constants.dart';
 import 'package:provider/provider.dart';
-import '../widgets/bottom_navigation_bar.dart';
+import '../widgets/global/bottom_navigation_bar.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -15,11 +15,11 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
-    final subcriptionProvider = Provider.of<SubscriptionProvider>(context);
+    final subscriptionProvider = Provider.of<SubscriptionProvider>(context);
     int? actualCurrency;
 
     TextEditingController nameEditingController =
-        TextEditingController(text: subcriptionProvider.name);
+        TextEditingController(text: subscriptionProvider.name);
 
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -70,7 +70,7 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                     ),
                     onSubmitted: (value) =>
-                        {subcriptionProvider.setName(value)},
+                        {subscriptionProvider.setName(value)},
                     controller: nameEditingController,
                   ),
                 ),
@@ -109,7 +109,7 @@ class _AccountPageState extends State<AccountPage> {
                   actualCurrency = value['value'];
                 },
                 defaultValue: actualCurrency == null
-                    ? dropdownCurrencyList[subcriptionProvider.currency]
+                    ? dropdownCurrencyList[subscriptionProvider.currency]
                     : dropdownCurrencyList[actualCurrency],
               )
             ],
@@ -117,8 +117,8 @@ class _AccountPageState extends State<AccountPage> {
         ),
         floatingActionButton: GestureDetector(
           onTap: () {
-            subcriptionProvider
-                .setCurrency(actualCurrency ?? subcriptionProvider.currency);
+            subscriptionProvider
+                .setCurrency(actualCurrency ?? subscriptionProvider.currency);
 
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(

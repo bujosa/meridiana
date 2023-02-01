@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meridiana/presentations/widgets/subscription_tile.dart';
+import 'package:meridiana/presentations/widgets/subscriptions/subscription_tile.dart';
 import 'package:meridiana/shared/providers/subscription.dart';
 import 'package:provider/provider.dart';
-import '../widgets/bottom_navigation_bar.dart';
+import '../widgets/global/bottom_navigation_bar.dart';
 
 class SubscriptionsPage extends StatefulWidget {
   const SubscriptionsPage({super.key});

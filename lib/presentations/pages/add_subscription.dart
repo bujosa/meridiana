@@ -5,7 +5,7 @@ import 'package:meridiana/shared/providers/subscription.dart';
 import 'package:provider/provider.dart';
 import '../../shared/models/subscription.dart';
 import '../../shared/utils/constants.dart';
-import '../widgets/bottom_navigation_bar.dart';
+import '../widgets/global/bottom_navigation_bar.dart';
 
 class AddSubscriptionPage extends StatefulWidget {
   const AddSubscriptionPage({super.key});
@@ -175,7 +175,7 @@ class _AddSubscriptionPageState extends State<AddSubscriptionPage> {
                   resultWidth: MediaQuery.of(context).size.width * 0.85,
                   resultHeight: MediaQuery.of(context).size.height * 0.070,
                   dropdownHeight: 200,
-                  dropdownWidth: MediaQuery.of(context).size.width * 0.4,
+                  dropdownWidth: MediaQuery.of(context).size.width * 0.6,
                   dropdownList: dropdownCategoryList,
                   onChange: (value) {
                     setState(() {
