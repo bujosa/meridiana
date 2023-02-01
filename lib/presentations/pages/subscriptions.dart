@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:meridiana/shared/models/subscription.dart';
 import 'package:meridiana/shared/providers/subscription.dart';
+import 'package:meridiana/shared/utils/category_map.dart';
 import 'package:provider/provider.dart';
 import '../widgets/bottom_navigation_bar.dart';
 
@@ -87,7 +87,8 @@ class _SubscriptionsPageState extends State<SubscriptionsPage> {
                               )),
                         ],
                       ),
-                      subtitle: const Text('Streaming'),
+                      subtitle: Text(
+                          categoryToTitle[subscription.category] as String),
                       onLongPress: () => {
                         showDialog(
                             context: context,
