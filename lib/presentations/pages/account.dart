@@ -31,13 +31,11 @@ class _AccountPageState extends State<AccountPage> {
             children: <Widget>[
               const Padding(
                 padding: EdgeInsets.only(top: 80.0),
-                child: Center(
-                  child: Text(
-                    'Account Page',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40,
-                    ),
+                child: Text(
+                  'Account Page',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40,
                   ),
                 ),
               ),
@@ -45,7 +43,7 @@ class _AccountPageState extends State<AccountPage> {
                 padding: const EdgeInsets.only(bottom: 20.0, top: 40),
                 child: Text('Name',
                     style: TextStyle(
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w400,
                       color: Theme.of(context).colorScheme.primary,
                       fontSize: 24,
                     )),
@@ -58,7 +56,7 @@ class _AccountPageState extends State<AccountPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextField(
-                    style: const TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                     decoration: const InputDecoration(
                       floatingLabelStyle: TextStyle(color: Colors.white),
                       border: OutlineInputBorder(),
@@ -79,7 +77,7 @@ class _AccountPageState extends State<AccountPage> {
                 padding: const EdgeInsets.only(bottom: 20.0),
                 child: Text('Currency',
                     style: TextStyle(
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w400,
                       color: Theme.of(context).colorScheme.primary,
                       fontSize: 24,
                     )),
@@ -125,7 +123,7 @@ class _AccountPageState extends State<AccountPage> {
                 duration: Duration(milliseconds: 1300),
                 content: Text(
                   'Information updated!',
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 18),
                 ),
               ),
             );
@@ -133,7 +131,7 @@ class _AccountPageState extends State<AccountPage> {
           child: Icon(
             Icons.edit_document,
             color: Theme.of(context).colorScheme.primary,
-            size: 50,
+            size: 45,
           ),
         ),
         bottomNavigationBar: const BottomNavigationBarWidget(index: 2));

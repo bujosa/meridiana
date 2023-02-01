@@ -22,11 +22,11 @@ class _SubscriptionsPageState extends State<SubscriptionsPage> {
           automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).colorScheme.background,
           elevation: 0,
-          title: Text(
+          title: const Text(
             'Subscriptions',
             style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-              fontSize: 30,
+              color: Colors.white,
+              fontSize: 35,
             ),
           ),
           actions: [
