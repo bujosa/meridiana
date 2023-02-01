@@ -33,11 +33,26 @@ const Map<int, Icon> currencyToIconHomePage = {
   ),
 };
 
-
-
 const Map<int, String> categoryToEmoji = {
-  0: '🏥',
-  1: '👨‍👩‍👧‍👦',
-  2: '📚',
-  3: '👨‍💻'
+  0: '❤️',
+  1: '🎞️',
+  2: '🍲',
+  3: '👨‍💻',
+  4: '🏠',
+  5: '🎮',
+  6: '🚗',
+  7: '💼',
+  8: '📱',
+};
+
+const Map<int, String> categoryToTitle = {
+  0: 'Health',
+  1: 'Streaming',
+  2: 'Food',
+  3: 'Education & Tech',
+  4: 'Home Services',
+  5: 'Gaming',
+  6: 'Car Services',
+  7: 'Work',
+  8: 'Phone Services',
 };
